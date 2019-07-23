@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show</title>
+    <th:block th:insert="Base :: bootstrap-css"></th:block>
+</head>
+<body>
+
+<div class="container-fluid mt-3">
+    <div th:insert="Base :: navbar"></div>
+
+    <br/>
+    <br/>
+    <br>
+
+
+    <div class="jumbotron text-center">
+        <a href="/">Show All Car</a><br />
+        Manufacturer :<span th:text="${car.manufacturer}" ></span><br />
+        Model :<p th:text="${car.style}"></p>
+        Year:<span th:text="${car.year}"></span><br />
+        MSRP : <span th:text="${car.mSRP}"></span><br />
+        <a th:href="@{/update/{id}(id=${car.id})}">Update this car</a>
+        <a th:href="@{/delete/{id}(id=${car.id})}">Delete this car</a>
+
+    </div>
+
+
+</div>
+</body>
+</html>

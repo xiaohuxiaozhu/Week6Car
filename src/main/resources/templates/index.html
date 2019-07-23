@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List</title>
+
+
+    <th:block th:insert="Base :: bootstrap-css"></th:block>
+
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Belgrano|Flamenco&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="container-fluid mt-3">
+    <div th:insert="Base :: navbar"></div>
+
+
+
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <div class="jumbotron text-center">
+        <tr>
+            <th>Seller Namer</th>
+            <th>Manufacturer</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th>MSRP</th>
+            <th>Category</th>
+        </tr><br/>
+        <tr th:each="car : ${cars}">
+            <td th:text="${car.carName}"></td>
+            <td th:text="${car.manufacturer}"></td>
+            <td th:text="${car.style}"></td>
+            <td th:text="${car.year}"></td>
+            <td th:text="${car.mSRP}"></td>
+
+            <td>
+                <a th:href="@{/update/{id}(id=${car.id})}">Update</a>-
+                <a th:href="@{/detail/{id}(id=${car.id})}">Details</a> -
+                <a th:href="@{/delete/{id}(id=${car.id})}">Delete</a>
+            </td>
+
+
+        </tr>
+
+    </div>
+</body>
+</html>
