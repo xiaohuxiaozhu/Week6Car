@@ -19,21 +19,19 @@ public class HomeController {
     @Autowired
     CarRepository carRepository;
 
-    @Autowired
-    CategoriesCarRepository categoriesCarRepository;
 
     @RequestMapping("/")
     public String index(Model model){
         model.addAttribute("category",categoriesRepository.findAll() );
         model.addAttribute("cars",carRepository.findAll());
-        model.addAttribute("categoryCars",categoriesCarRepository);
+//        model.addAttribute("categoryCars",categoriesCarRepository);
         return "index";
     }
 
     @GetMapping("/addcar")
     public String carForm(Model model){
         model.addAttribute("car", new Car());
-//        model.addAttribute("category",categoriesRepository.findAll());
+        model.addAttribute("category",categoriesRepository.findAll());
         return  "carForm";
 
 
@@ -41,11 +39,30 @@ public class HomeController {
 
     @PostMapping("/process")
     public String processForm(@Valid Car car,
-                              BindingResult result){
+                              BindingResult result,
+                              Model model){
         if(result.hasErrors()){
+            model.addAttribute("category",categoriesRepository.findAll());
             return "carForm";
         }
         carRepository.save(car);
+        return "redirect:/";
+    }
+
+    @GetMapping("/addcategory")
+    public  String categoryForm(Model model){
+        model.addAttribute("categories", new Categories());
+//        model.addAttribute("category",categoriesRepository.findAll());
+        return "categoryForm";
+    }
+
+    @PostMapping("/processcategory")
+    public String processCategory(@Valid Categories categories,
+    BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "categoryForm";
+        }
+        categoriesRepository.save(categories);
         return "redirect:/";
     }
 

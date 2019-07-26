@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,14 +11,17 @@ public class Categories {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+
     private String categoriesName;
 
+    //One category can have many cars
+    @OneToMany(mappedBy = "categories",
+            cascade = CascadeType.REMOVE,
+            fetch = FetchType.EAGER)
+    public Set<Car> cars;
 
-    @OneToMany(mappedBy = "catego")
-    private Set<CategoriesCar> categoriesCars;
+    public Categories() {
 
-    public Categories(){
-        categoriesCars =  new HashSet<>();
     }
 
     public long getId() {
@@ -36,11 +40,13 @@ public class Categories {
         this.categoriesName = categoriesName;
     }
 
-    public Set<CategoriesCar> getCategoriesCars() {
-        return categoriesCars;
+    public Set<Car> getCars() {
+        return cars;
     }
 
-    public void setCategoriesCars(Set<CategoriesCar> categoriesCars) {
-        this.categoriesCars = categoriesCars;
+    public void setCars(Set<Car> cars) {
+        this.cars = cars;
     }
 }
+
+

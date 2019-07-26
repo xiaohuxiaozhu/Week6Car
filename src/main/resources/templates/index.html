@@ -28,6 +28,10 @@
     <br/>
 
     <div class="jumbotron text-center">
+        <br/>
+        <span><a href="/addcategory">Add a new category? </a><a href="/addcar"> Add a new car?</a></span><br/>
+        <br/>
+
         <tr>
             <th>Seller Namer</th>
             <th>Manufacturer</th>
@@ -42,15 +46,19 @@
             <td th:text="${car.style}"></td>
             <td th:text="${car.year}"></td>
             <td th:text="${car.mSRP}"></td>
-
-            <td>
+            <td th:text="${car.carpic}"></td>
+            <td th:text="${car.categories.categoriesName}"></td>
+            <!--<tr th:each="catego: ${category}"></tr>-->
+            <!--<td th:text="${catego.categoriesName}"></td>-->
                 <a th:href="@{/update/{id}(id=${car.id})}">Update</a>-
                 <a th:href="@{/detail/{id}(id=${car.id})}">Details</a> -
                 <a th:href="@{/delete/{id}(id=${car.id})}">Delete</a>
             </td>
-
+        <br/>
 
         </tr>
+
+        <br />
 
     </div>
 </body>

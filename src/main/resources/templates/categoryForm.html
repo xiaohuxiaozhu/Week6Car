@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<br/>
+<form action="#"
+      th:action="@{/processcategory}"
+      th:object="${categories}"
+      method="post">
+    <input type="hidden" th:field="*{id}" />
+    Category :<input type="text" th:field="*{categoriesName}" />
+    <span th:if="${#fields.hasErrors('categoriesName')}"
+          th:errors="*{categoriesName}"></span><br />
+
+    <br/>
+    <input type="submit" value="Submit" />
+</form>
+
+</form>
+</body>
+</html>

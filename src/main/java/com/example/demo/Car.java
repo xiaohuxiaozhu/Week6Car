@@ -1,42 +1,57 @@
 package com.example.demo;
 
+import org.hibernate.annotations.Fetch;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 @Entity
+//create table sql
 public class Car {
     @Id
+    //auto incriment our id numbers
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
+    //none of these can be null
     @NotNull
-    @Size(min=3)
+    @Size(min = 3)
     private String carName;
 
     @NotNull
-    @Size(min=3)
+    @Size(min = 3)
     private String manufacturer;
 
     @NotNull
-    @Size(min=3)
+    @Size(min = 3)
     private String style;
 
     @NotNull
-    @Size(min=2)
+    @Size(min = 2)
     private String year;
 
     @NotNull
-    @Size(min=2)
+    @Size(min = 2)
     private String mSRP;
 
-    @OneToMany(mappedBy = "car")
-    private Set<CategoriesCar> categoriesCar;
+    //prive string categoryName
+    private String carpic;
+
+    //there are many different types of cars to one Category
+    //Fetch type Eagar means
+    @ManyToOne(fetch = FetchType.EAGER)
+    //join the column on the CateGory ID which is Unique
+
+    @JoinColumn(name = "category_id")
+    private Categories  categories;
+
+
 
     public Car() {
-        categoriesCar = new HashSet<>();
+
 
     }
 
@@ -97,11 +112,19 @@ public class Car {
         this.mSRP = mSRP;
     }
 
-    public Set<CategoriesCar> getCategoriesCar() {
-        return categoriesCar;
+    public String getCarpic() {
+        return carpic;
     }
 
-    public void setCategoriesCar(Set<CategoriesCar> categoriesCar) {
-        this.categoriesCar = categoriesCar;
+    public void setCarpic(String carpic) {
+        this.carpic = carpic;
+    }
+
+    public Categories getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Categories categories) {
+        this.categories = categories;
     }
 }
